@@ -11,11 +11,9 @@ import {
 } from '@dnd-kit/core';
 import type {
     DragEndEvent,
-    DragOverEvent,
     DragStartEvent,
 } from '@dnd-kit/core';
 import {
-    arrayMove,
     SortableContext,
     sortableKeyboardCoordinates,
     verticalListSortingStrategy,
@@ -174,8 +172,7 @@ export const TreeView: React.FC = () => {
             if (!activeInfo || !overInfo) return prevNodes;
 
             if (activeInfo.items === overInfo.items) {
-                const oldIndex = activeInfo.index;
-                const newIndex = overInfo.index;
+              
 
                 const newTree = JSON.parse(JSON.stringify(prevNodes));
 
