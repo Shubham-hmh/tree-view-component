@@ -1,4 +1,3 @@
-import React from 'react';
 import { TreeView } from './components/tree-view/TreeView';
 import './index.css';
 
