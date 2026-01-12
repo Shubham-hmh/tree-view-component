@@ -9,12 +9,19 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
+    target: 'es2020',
     rollupOptions: {
       output: {
         manualChunks: undefined,
-        assetFileNames: 'assets/[name].[hash][extname]',
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+            return 'assets/[name].[hash].css';
+          }
+          return 'assets/[name].[hash][extname]';
+        },
         chunkFileNames: 'assets/[name].[hash].js',
         entryFileNames: 'assets/[name].[hash].js',
+        format: 'es',
       },
     },
   },
@@ -22,6 +29,4 @@ export default defineConfig({
     port: 5173,
     host: true,
   },
-  },
-  
-)
+})
