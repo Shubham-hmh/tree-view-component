@@ -1,0 +1,213 @@
+/* Tree.module.css */
+
+.treeContainer {
+  font-family: 'Inter', sans-serif;
+  padding: 20px;
+  background-color: #f8f9fb;
+  /* Light background */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  user-select: none;
+}
+
+.treeRoot {
+  position: relative;
+  padding-left: 20px;
+}
+
+/* Connectors */
+.nodeWrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.nodeContent {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #eee;
+  position: relative;
+  z-index: 2;
+  min-width: 250px;
+}
+
+.nodeContent:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+  border-color: #d0d7de;
+}
+
+.nodeHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+/* Avatar/Icon Circle */
+.nodeIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #3b82f6;
+  /* Blue for A */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+.nodeIcon.childLevel {
+  background: #84cc16;
+  box-shadow: 0 2px 4px rgba(132, 204, 22, 0.3);
+}
+
+/* Text */
+.nodeLabel {
+  font-weight: 500;
+  color: #1f2937;
+  font-size: 14px;
+}
+
+.inputField {
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 14px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.inputField:focus {
+  border-color: #3b82f6;
+}
+
+/* Controls */
+.controls {
+  margin-left: auto;
+  /* Push to right */
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.nodeContent:hover .controls {
+  opacity: 1;
+}
+
+.iconButton {
+  padding: 4px;
+  border-radius: 4px;
+  color: #6b7280;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconButton:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.iconButton.delete:hover {
+  background-color: #fee2e2;
+  color: #ef4444;
+}
+
+/* Tree Lines (The harder part) */
+.childrenContainer {
+  padding-left: 20px;
+  /* Indent children */
+  margin-top: -6px;
+  /* Pull up to connect */
+  position: relative;
+}
+
+/* Vertical line segments */
+.childrenContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 18px;
+  /* Stop before last child's center */
+  left: 38px;
+  /* Align with parent center approximately - need to tune */
+  width: 2px;
+  border-left: 2px dashed #d1d5db;
+  z-index: 1;
+}
+
+/* Horizontal connector for each child */
+.childConnector {
+  position: absolute;
+  left: -20px;
+  /* From the vertical line */
+  top: 28px;
+  /* Center of child */
+  width: 20px;
+  height: 2px;
+  border-top: 2px dashed #d1d5db;
+}
+
+/* Hide vertical line if empty or collapsed */
+.childrenContainer:empty::before {
+  display: none;
+}
+
+/* Custom dashed line logic needs to be robust. 
+   Simplest is absolute positioning relative to child. 
+*/
+
+.nodeWrapper {
+  position: relative;
+}
+
+/* Vertical line coming down from parent */
+.lineDown {
+  position: absolute;
+  left: 18px;
+  /* Center of icon usually */
+  top: 46px;
+  /* Bottom of node */
+  bottom: 0px;
+  width: 2px;
+  border-left: 2px dashed #cbd5e1;
+  z-index: 0;
+}
+
+/* Horizontal line going to child */
+.lineAcross {
+  position: absolute;
+  left: -22px;
+  /* Connect to parent's lineDown */
+  top: 28px;
+  /* Center of node vert */
+  width: 22px;
+  border-top: 2px dashed #cbd5e1;
+}
+
+/* Fix for the main vertical line */
+.treeNodeChildren {
+  padding-left: 40px;
+  /* Indentation */
+  position: relative;
+}
