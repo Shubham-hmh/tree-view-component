@@ -14,7 +14,7 @@ interface TreeNodeProps {
     isLast?: boolean;
 }
 
-export const TreeNode: React.FC<TreeNodeProps> = ({ node, depth, context, parentId, isLast }) => {
+export const TreeNode: React.FC<TreeNodeProps> = ({ node, depth, context, parentId}) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editName, setEditName] = useState(node.name);
     const inputRef = useRef<HTMLInputElement>(null);
